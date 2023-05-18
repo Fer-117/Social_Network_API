@@ -1,0 +1,21 @@
+{
+  "name": "social-network-api",
+  "version": "1.0.0",
+  "description": "Back end for a social network ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.28.0",
+    "mongoose": "^5.10.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Fer-117"
+  },
+  "author": "Fernando Sanchez",
+  "license": "MIT"
+}
