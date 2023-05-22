@@ -1,8 +1,8 @@
 const { Schema } = require('mongoose');
 
-function dateFormat() {
+function dateFormat(value) {
   // Using the `toLocaleString` method to format the date as a string
-  return this.default.toLocaleString();
+  return value.toLocaleString();
 }
 
 const reactionSchema = new Schema(
@@ -23,7 +23,9 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: dateFormat,
+      get: function (value) {
+        return dateFormat(value || this.createdAt);
+      },
     },
   },
   {

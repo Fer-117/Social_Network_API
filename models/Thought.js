@@ -1,9 +1,9 @@
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./reactionSchema');
 
-function dateFormat() {
+function dateFormat(value) {
   // Using the `toLocaleString` method to format the date as a string
-  return this.default.toLocaleString();
+  return value.toLocaleString();
 }
 
 const thoughtSchema = new Schema(
@@ -17,7 +17,9 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: dateFormat,
+      get: function (value) {
+        return dateFormat(value || this.createdAt);
+      },
     },
     username: {
       type: String,
@@ -38,6 +40,6 @@ thoughtSchema.virtual('reactionCount').get(function () {
   return this.reactions.length;
 });
 
-const Thought = model('Thought', thoughtSchema);
+const Thought = model('thought', thoughtSchema);
 
 module.exports = Thought;

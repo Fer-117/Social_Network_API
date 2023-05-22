@@ -7,11 +7,14 @@ module.exports = {
   async getAllThoughts(req, res) {
     try {
       const thoughts = await Thought.find();
+
       res.json(thoughts);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   },
+
   // Get a single thought
   async getThoughtById(req, res) {
     try {
@@ -28,6 +31,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
   // Create a thought
   async createThought(req, res) {
     try {
@@ -42,7 +46,7 @@ module.exports = {
   async updateThought(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
-        { _id: req.params.id },
+        { _id: req.params.thoughtId },
         { $set: req.body },
         { runValidators: true, new: true }
       );
@@ -61,7 +65,7 @@ module.exports = {
   async deleteThought(req, res) {
     try {
       const thought = await Thought.findOneAndDelete({
-        _id: req.params.id,
+        _id: req.params.thoughtId,
       });
 
       if (!thought) {
